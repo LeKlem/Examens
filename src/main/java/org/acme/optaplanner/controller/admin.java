@@ -29,7 +29,7 @@ public class admin {
 
     public static boolean Display() throws SQLException {
         exit = false;
-        combo.getItems().addAll("Secrétarité", "Scolarité");
+        combo.getItems().addAll("Secrétaria", "Scolarité");
         combo.setValue("Selectionner une valeur");
         Stage window = new Stage();
         window.setTitle("Connexion");
@@ -50,7 +50,9 @@ public class admin {
         valider.setOnAction(e -> {
             String job = combo.getValue();
             if(!job.equals("Selectionner une valeur")) {
-                MyDataSourceFactory.CreateAccount(con, Login.getText(), Password.getText(), nom.getText(), prenom.getText(), job);
+                String psw = Password.getText();
+                psw = PasswordUtils.HashPassword(psw);
+                MyDataSourceFactory.CreateAccount(con, Login.getText(), psw, nom.getText(), prenom.getText(), job);
                 nom.setText("");
                 prenom.setText("");
                 Login.setText("");

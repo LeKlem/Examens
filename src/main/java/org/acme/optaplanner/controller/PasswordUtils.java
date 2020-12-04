@@ -15,15 +15,16 @@ public class PasswordUtils {
     private static final String ALPHABET = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     private static final int ITERATIONS = 10000;
     private static final int KEY_LENGTH = 256;
+    private static final String SALT = "DvBcgJs47yz2YkU2i4kEqNEyqGMiqs";
 
-    public static String getSalt(int length) {
-      /*  StringBuilder returnValue = new StringBuilder(length);
+   /* public static String getSalt(int length) {
+        StringBuilder returnValue = new StringBuilder(length);
         for (int i = 0; i < length; i++) {
             returnValue.append(ALPHABET.charAt(RANDOM.nextInt(ALPHABET.length())));
         }
-        return new String(returnValue);*/
+        return new String(returnValue);
         return "DvBcgJs47yz2YkU2i4kEqNEyqGMiqs";
-    }
+    }*/
     public static byte[] hash(char[] password, byte[] salt) {
         PBEKeySpec spec = new PBEKeySpec(password, salt, ITERATIONS, KEY_LENGTH);
         Arrays.fill(password, Character.MIN_VALUE);
@@ -36,9 +37,9 @@ public class PasswordUtils {
             spec.clearPassword();
         }
     }
-    public static String HashPassword(String password, String salt) {
+    public static String HashPassword(String password) {
         String returnValue = null;
-        byte[] securePassword = hash(password.toCharArray(), salt.getBytes());
+        byte[] securePassword = hash(password.toCharArray(), SALT.getBytes());
 
         returnValue = Base64.getEncoder().encodeToString(securePassword);
 
@@ -46,12 +47,12 @@ public class PasswordUtils {
     }
 
     public static boolean verifyUserPassword(String providedPassword,
-                                             String securedPassword, String salt)
+                                             String securedPassword)
     {
         boolean returnValue = false;
 
         // Generate New secure password with the same salt
-        String newSecurePassword = HashPassword(providedPassword, salt);
+        String newSecurePassword = HashPassword(providedPassword);
 
         // Check if two passwords are equal
         returnValue = newSecurePassword.equalsIgnoreCase(securedPassword);

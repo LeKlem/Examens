@@ -16,13 +16,15 @@ public class Main extends Application {
         do{
             deco = false;
             String connectedAs = connexion.Display();
+            System.out.println(connectedAs);
             switch (connectedAs)  {
                 case ("Admin"):
                     deco = admin.Display();
                     break;
                 case ("Secretariat"):
                     break;
-                case ("Scolarite"):
+                case ("Scolarité"):
+                    scolarite.Display();
                     break;
             }
         }while(deco);

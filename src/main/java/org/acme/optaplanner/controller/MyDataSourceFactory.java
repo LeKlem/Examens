@@ -26,8 +26,7 @@ public class MyDataSourceFactory {
 
 
     public static String Connecting(Connection con, String log, String psw) {
-        String salt = PasswordUtils.getSalt(30);
-        psw = PasswordUtils.HashPassword(psw, salt);
+        psw = PasswordUtils.HashPassword(psw);
         Statement stmt;
         ResultSet rs = null;
         try {
