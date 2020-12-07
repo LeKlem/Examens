@@ -14,6 +14,7 @@ public class MyDataSourceFactory {
 
 
     static Connection getConnection () throws SQLException {
+        //Singleton, renvoie la connexion en la créant si elle n'existe pas
         if(mysqlDS == null){
             mysqlDS = new MysqlDataSource();
             mysqlDS.setURL("jdbc:mysql://localhost/exams?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC");
@@ -26,6 +27,7 @@ public class MyDataSourceFactory {
 
 
     public static String Connecting(Connection con, String log, String psw) {
+        //Crypte le mdp selon la même clé static que celle utilisée pour remplir la bdd
         psw = PasswordUtils.HashPassword(psw);
         Statement stmt;
         ResultSet rs = null;
@@ -35,6 +37,7 @@ public class MyDataSourceFactory {
             pst.setString(1, log);
             rs = pst.executeQuery();
             while(rs.next()) {
+                //Si nous avons un résultat, on compare les deux mdp cryptés et on renvoie le role si ça correspond
                 if(rs.getString("password").equals(psw)) {
                     return (rs.getString("job"));
                 }

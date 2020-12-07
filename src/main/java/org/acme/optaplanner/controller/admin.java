@@ -62,6 +62,7 @@ public class admin {
             }
         });
         deco.setOnAction(e -> {
+
             exit = true;
             window.close();
         });

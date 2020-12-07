@@ -26,6 +26,9 @@ public class connexion {
         window.setTitle("Connexion");
         GridPane GRconn = new GridPane();
 
+        /*
+        Set up de la scène
+         */
         GRconn.setAlignment(Pos.CENTER);
         GRconn.add(Llog, 0, 0);
         GRconn.add(Login, 1, 0);
@@ -35,7 +38,7 @@ public class connexion {
         con = MyDataSourceFactory.getConnection();
         valider.setOnAction(e -> {
             connectedAs = MyDataSourceFactory.Connecting(con, Login.getText(), Password.getText());
-            if(connectedAs != null)
+            if(connectedAs != "")
                 window.close();
         });
         Scene scene = new Scene(GRconn, 300, 150);

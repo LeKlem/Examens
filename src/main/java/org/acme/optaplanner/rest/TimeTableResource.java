@@ -20,10 +20,10 @@ public class TimeTableResource {
 
     @Inject
     SolverManager<TimeTable, UUID> solverManager;
-
     @POST
     @Path("/solve")
     public TimeTable solve(TimeTable problem) {
+
         UUID problemId = UUID.randomUUID();
         // Submit the problem to start solving
         SolverJob<TimeTable, UUID> solverJob = solverManager.solve(problemId, problem);
@@ -34,6 +34,7 @@ public class TimeTableResource {
         } catch (InterruptedException | ExecutionException e) {
             throw new IllegalStateException("Solving failed.", e);
         }
+        System.out.println(solution.getLessonList());
         return solution;
     }
 
