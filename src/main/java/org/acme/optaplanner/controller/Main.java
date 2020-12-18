@@ -1,8 +1,8 @@
 package org.acme.optaplanner.controller;
 
 import javafx.application.Application;
-
 import javafx.stage.Stage;
+import org.acme.optaplanner.controller.secretaria.Accueil;
 
 
 public class Main extends Application {
@@ -29,6 +29,7 @@ public class Main extends Application {
                     deco = admin.Display();
                     break;
                 case ("Secretariat"):
+                    deco = Accueil.Display();
                     break;
                 case ("Scolarité"):
                     scolarite.Display();
