@@ -61,12 +61,22 @@ public class scolarite {
 
         Scene scene = new Scene(grid, 300, 150);
 
+        Battribuer.setOnAction(e -> window.setScene(getAScene()));
+        window.setScene(scene);
+        window.showAndWait();
+
+       /* Bcalendrier.setOnAction(e -> window.setScene(getCScene()));
+        window.setScene(scene);
+        window.showAndWait(); */ //pas encore de scene calendrier
+
         Brechercher.setOnAction(e -> window.setScene(getRScene()));
         window.setScene(scene);
         window.showAndWait();
     }
     public static Scene getRScene(){
 
+        Stage window = new Stage();
+        window.setTitle("Recherche");
         GridPane grid = new GridPane();
 
         grid.add(Dannee, 1, 0);
@@ -79,19 +89,29 @@ public class scolarite {
         grid.add(Brechercher, 1, 4);
         grid.add(Bannuler, 2, 4);
 
-
         Scene sceneRechercher = new Scene(grid, 300, 150);
-        Bvalider.setOnAction(new EventHandler<ActionEvent>() {
+
+        Brechercher.setOnAction(e -> window.setScene(getIScene()));
+        window.setScene(sceneRechercher);
+        window.showAndWait();
+
+        Bannuler.setOnAction(e -> window.setScene(getRScene()));
+        window.setScene(sceneRechercher);
+        window.showAndWait();
+
+       /* Bvalider.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent arg0) {
             }
-        });
+        }); */
         return sceneRechercher;
 
     }
 
     public static Scene getIScene(){
 
+        Stage window = new Stage();
+        window.setTitle("Info");
         GridPane grid = new GridPane();
 
         grid.add(Lexamen, 0, 0);
@@ -107,11 +127,25 @@ public class scolarite {
         grid.add(Bannuler, 2, 4);
 
         Scene sceneInfo = new Scene(grid, 300, 150);
-        Battribuer.setOnAction(new EventHandler<ActionEvent>() {
+
+        Battribuer.setOnAction(e -> window.setScene(getAScene()));
+        window.setScene(sceneInfo);
+        window.showAndWait();
+
+        Bmodifier.setOnAction(e -> window.setScene(getMoScene()));
+        window.setScene(sceneInfo);
+        window.showAndWait();
+
+        Bannuler.setOnAction(e -> window.setScene(getRScene()));
+        window.setScene(sceneInfo);
+        window.showAndWait();
+
+
+      /*  Battribuer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent arg0) {
             }
-        });
+        }); */
         return sceneInfo;
 
     }
@@ -120,6 +154,8 @@ public class scolarite {
 
     public static Scene getAScene(){
 
+        Stage window = new Stage();
+        window.setTitle("Attribution");
         GridPane grid = new GridPane();
 
         grid.add(Lexamen, 0, 0);
@@ -134,19 +170,26 @@ public class scolarite {
         grid.add(Bannuler, 1, 4);
 
 //SCENE ATTRIBUER
-        Scene sceneInfo = new Scene(grid, 300, 150);
+        Scene sceneAttribuer = new Scene(grid, 300, 150);
+
         Battribuer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent arg0) {
             }
         });
 
-        return sceneInfo;
+        Bannuler.setOnAction(e -> window.setScene(getIScene()));
+        window.setScene(sceneAttribuer);
+        window.showAndWait();
+
+        return sceneAttribuer;
 
     }
 
     public static Scene getMoScene(){
 
+        Stage window = new Stage();
+        window.setTitle("Modification");
         GridPane grid = new GridPane();
 
         grid.add(Lexamen, 0, 0);
@@ -161,13 +204,19 @@ public class scolarite {
         grid.add(Bannuler, 1, 4);
 
 //SCENE MODIFIER
-        Scene sceneInfo = new Scene(grid, 300, 150);
+        Scene sceneModif = new Scene(grid, 300, 150);
+
         Battribuer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent arg0) {
             }
         });
-        return sceneInfo;
+
+        Bannuler.setOnAction(e -> window.setScene(getIScene()));
+        window.setScene(sceneModif);
+        window.showAndWait();
+
+        return sceneModif;
 
     }
 }
