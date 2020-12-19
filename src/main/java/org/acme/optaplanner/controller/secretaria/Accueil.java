@@ -5,9 +5,22 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
 import java.sql.SQLException;
 
+/**
+ * <b>Accueil est la classe permettant de choisirs si l'utilisateur veux créer ou rechercher un Examen</b>
+ * <p>
+ *     Elle pourra être ammenée à appeller les interfaces suivantes :
+ *     <ul>
+ *         <li>AjouteExam.</li>
+ *         <li>Rechercher.</li>
+ *     </ul>
+ *
+ *
+ *
+ * @author Nathan Chapelle
+ * @version 1.0
+ */
 public class Accueil
 {
     //Implémentation des différents éléments
@@ -15,6 +28,11 @@ public class Accueil
     static Button search = new Button("Rechercher un examen");
     static boolean exit;
 
+    /**
+     * Affichage de l'interface graphique
+     * @return  Si true ou false en fonction de si il a quitté la page
+     * @throws SQLException si jamais il y a un problème avec la base de donnée
+     */
     public static boolean Display() throws SQLException
     {
         exit = false;
@@ -40,7 +58,6 @@ public class Accueil
                 throwables.printStackTrace();
             }
         });
-
 
         search.setOnAction(e ->
         {

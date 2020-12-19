@@ -7,13 +7,31 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.acme.optaplanner.controller.MyDataSourceFactory;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Optional;
 
+/**
+ * <b>Cette classe permet à l'utilisateur d'inscrire les différents caractéristique d'un examen</b>
+ * <p>
+ *     Un examen est décrit avec les paramètres suivants
+ *     <ul>
+ *         <li>Un matière</li>
+ *         <li>L'année d'étude</li>
+ *         <li>La filière qui passera l'épreuve</li>
+ *         <li>La durée de l'examen</li>
+ *         <li>Le format de l'examen, Oral ou écrit</li>
+ *         <li>Le type de salle dont a besoin l'examen, une salle avec des ordinateurs par exemple</li>
+ *     </ul>
+ * </p>
+ *
+ * @author Nathan Chapelle
+ * @version 1.0
+ */
 public class AjouteExam
 {
-    //Implémentations des différents éléments --------------
     static Label matiere = new Label("Matière :");
     static Label anneeEtu = new Label("Année d'étude :");
     static ComboBox comboMatiere = new ComboBox();
@@ -31,8 +49,13 @@ public class AjouteExam
     static Button add = new Button("Ajouter");
     static Button cancel = new Button("Annuler");
     static boolean exit;
+    static Connection con;
 
 
+    /**
+     * Interface graphique de la page pour créer un Examen
+     * @throws SQLException
+     */
     public static boolean Display() throws SQLException
     {
         exit  = false;
@@ -82,6 +105,8 @@ public class AjouteExam
         //Boutons----------------------------
         hbox.getChildren().add(add);
         hbox.getChildren().add(cancel);
+
+        con = MyDataSourceFactory.getConnection();
 
         //Fonctionnement des Boutons
         bFiliere.setOnAction(e ->
