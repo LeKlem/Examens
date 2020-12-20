@@ -50,9 +50,13 @@ public class admin {
         valider.setOnAction(e -> {
             String job = combo.getValue();
             if(!job.equals("Selectionner une valeur")) {
+                String log = Login.getText();
                 String psw = Password.getText();
+                String n =  nom.getText();
+                String p = prenom.getText();
                 psw = PasswordUtils.HashPassword(psw);
-                MyDataSourceFactory.CreateAccount(con, Login.getText(), psw, nom.getText(), prenom.getText(), job);
+                if(!( log.isEmpty() || psw.isEmpty() || n.isEmpty() || p.isEmpty()))
+                    MyDataSourceFactory.CreateAccount(con, log, psw, n, p, job);
                 nom.setText("");
                 prenom.setText("");
                 Login.setText("");
