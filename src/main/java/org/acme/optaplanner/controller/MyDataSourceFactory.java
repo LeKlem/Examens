@@ -45,7 +45,7 @@ public class MyDataSourceFactory {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return "";
     }
     public static void CreateAccount(Connection con, String log, String password, String nom, String prenom, String job)  {
         try {
