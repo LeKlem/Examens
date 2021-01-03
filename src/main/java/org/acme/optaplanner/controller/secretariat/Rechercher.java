@@ -1,4 +1,4 @@
-package org.acme.optaplanner.controller.secretaria;
+package org.acme.optaplanner.controller.secretariat;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -6,6 +6,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
 import java.sql.SQLException;
 
 public class Rechercher

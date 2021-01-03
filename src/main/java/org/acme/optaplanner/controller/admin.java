@@ -17,6 +17,7 @@ public class admin {
     static TextField prenom = new TextField();
     static TextField Login = new TextField();
     static TextField Password = new TextField();
+    static Label Poste = new Label("Poste : ");
     static Button deco = new Button("Déconnexion");
     static Button valider = new Button("Valider");
     static Label Lnom = new Label("Nom :  ");
@@ -35,7 +36,6 @@ public class admin {
         window.setTitle("Connexion");
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
-        grid.add(combo, 2, 0);
         grid.add(Lnom, 0, 0);
         grid.add(nom, 1, 0);
         grid.add(Lprenom, 0, 1);
@@ -44,8 +44,10 @@ public class admin {
         grid.add(Login, 1, 2);
         grid.add(Lpsw, 0, 3);
         grid.add(Password, 1, 3);
-        grid.add(valider, 0 ,4);
-        grid.add(deco , 1, 4);
+        grid.add(Poste, 0, 4);
+        grid.add(combo, 1, 4);
+        grid.add(valider, 0 ,5);
+        grid.add(deco , 1, 5);
         con = MyDataSourceFactory.getConnection();
         valider.setOnAction(e -> {
             String job = combo.getValue();

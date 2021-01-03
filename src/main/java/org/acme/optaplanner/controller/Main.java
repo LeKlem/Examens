@@ -2,7 +2,8 @@
 
     import javafx.application.Application;
     import javafx.stage.Stage;
-    import org.acme.optaplanner.controller.secretaria.Accueil;
+    import org.acme.optaplanner.controller.scolarite.ScoAccueil;
+    import org.acme.optaplanner.controller.secretariat.Accueil;
 
     /**
      * <b>Main est la classe contenant le main permettant l'articulation des différentes parties entre-elles</b>
@@ -50,18 +51,16 @@
                 connectedAs = connexion.Display();
                 switch (connectedAs)  {
                     case ("Admin"):
-                        deco = Accueil.Display();
-                     //   deco = admin.Display();
+                        deco = admin.Display();
                         break;
                     case ("Secretariat"):
                         deco = Accueil.Display();
                         break;
                     case ("Scolarité"):
-                        scolarite.Display();
+                        deco = ScoAccueil.Display();
                         break;
                     case (""):
                         break;
-
                 }
             }while(deco);
         }

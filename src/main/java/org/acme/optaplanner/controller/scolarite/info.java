@@ -104,7 +104,7 @@ public class info {
             {
                 exit = true;
                 try {
-                    accueil.Display();
+                    ScoAccueil.Display();
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }

@@ -10,10 +10,9 @@ import org.acme.optaplanner.controller.MyDataSourceFactory;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class accueil {
+public class ScoAccueil {
 
     //implémentations
-
     static Button Battribuer = new Button("Attribuer");
     static Button Bcalendrier = new Button("Calendrier");
     static Button Brechercher = new Button("Rechercher");
@@ -66,7 +65,7 @@ public class accueil {
         Brechercher.setOnAction(e ->
         {
             try {
-                rechercher.Display();
+                ScoRechercher.Display();
             } catch (SQLException throwables)
             {
                 throwables.printStackTrace();

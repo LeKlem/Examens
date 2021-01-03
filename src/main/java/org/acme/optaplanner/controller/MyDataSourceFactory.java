@@ -13,7 +13,7 @@ public class MyDataSourceFactory {
     static Connection con;
 
 
-    static Connection getConnection () throws SQLException {
+    public static Connection getConnection() throws SQLException {
         //Singleton, renvoie la connexion en la créant si elle n'existe pas
         if(mysqlDS == null){
             mysqlDS = new MysqlDataSource();

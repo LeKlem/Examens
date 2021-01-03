@@ -1,4 +1,4 @@
-package org.acme.optaplanner.controller.secretaria;
+package org.acme.optaplanner.controller.secretariat;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;

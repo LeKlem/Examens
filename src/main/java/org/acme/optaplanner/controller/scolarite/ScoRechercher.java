@@ -12,7 +12,7 @@ import java.sql.*;
 
 import java.util.Optional;
 
-public class rechercher {
+public class ScoRechercher {
 
     //implémentations
 
@@ -114,7 +114,7 @@ public class rechercher {
             {
                 exit = true;
                 try {
-                    accueil.Display();
+                    ScoAccueil.Display();
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }

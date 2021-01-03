@@ -88,7 +88,7 @@ public class attribuer {
             try {
                 Statement stmt = con.createStatement();
                 rs = stmt.executeQuery(requete);
-                accueil.Display();
+                ScoAccueil.Display();
                 while (rs.next()) {
                     String exam = (String) examen.getText();
                     exam = rs.getString("examen");
@@ -114,7 +114,7 @@ public class attribuer {
             {
                 exit = true;
                 try {
-                    accueil.Display();
+                    ScoAccueil.Display();
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
