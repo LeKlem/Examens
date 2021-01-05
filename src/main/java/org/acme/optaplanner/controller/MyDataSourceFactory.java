@@ -49,7 +49,7 @@ public class MyDataSourceFactory {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return "error";
     }
     public static void CreateAccount(Connection con, String log, String password, String nom, String prenom, String job)  {
         try {
@@ -104,5 +104,25 @@ public class MyDataSourceFactory {
         stmt.setString(5,format);
         stmt.setString(6,salle);
         stmt.execute();
+    }
+    static int getNumberOfExam(Connection con) throws SQLException {
+        int x = 0;
+        String str = "SELECT COUNT(*) AS X FROM Examen";
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery(str);
+        while (rs.next()){
+            x = rs.getInt("X");
+        }
+        return x;
+    }
+    static int getNumberOfUser(Connection con) throws SQLException {
+        int x = 0;
+        String str = "SELECT COUNT(*) AS X FROM users";
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery(str);
+        while (rs.next()){
+            x = rs.getInt("X");
+        }
+        return x;
     }
 }
