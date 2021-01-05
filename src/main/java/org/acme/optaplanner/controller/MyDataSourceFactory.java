@@ -49,7 +49,7 @@ public class MyDataSourceFactory {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return "";
+        return null;
     }
     public static void CreateAccount(Connection con, String log, String password, String nom, String prenom, String job)  {
         try {
@@ -95,4 +95,14 @@ public class MyDataSourceFactory {
         return new TimeTable(timeslotList, roomList, examensList);
     }
 
+    public static void CreateExam (Connection con, String matiere, String anneEtu,String filiere ,int duree, String format,String salle) throws SQLException {
+        PreparedStatement stmt = con.prepareStatement("INSERT INTO examen(matiere,annee,filiere,Durée,format,salle) VALUES (?, ?, ?, ?, ?, ? )");
+        stmt.setString(1,matiere);
+        stmt.setString(2,anneEtu);
+        stmt.setString(3,filiere);
+        stmt.setInt(4,duree);
+        stmt.setString(5,format);
+        stmt.setString(6,salle);
+        stmt.execute();
+    }
 }

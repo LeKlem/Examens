@@ -28,7 +28,7 @@ import java.util.Optional;
  * </p>
  *
  * @author Nathan Chapelle
- * @version 1.0
+ * @version 2.0
  */
 public class AjouteExam
 {
@@ -42,6 +42,9 @@ public class AjouteExam
     static TextField tfDuree = new TextField();
     static  Label format = new Label("Format :");
     static Label salle = new Label("Salle :");
+    static Label Linfo = new Label("Informatique");
+    static Label Lmath = new Label("Mathématiques");
+    static Label Lphy = new Label("Physique");
     static ToggleGroup gFormat = new ToggleGroup();
     static RadioButton radFormat1 = new RadioButton("Ecrit");
     static RadioButton radFormat2 = new RadioButton("Oral");
@@ -50,7 +53,8 @@ public class AjouteExam
     static Button cancel = new Button("Annuler");
     static boolean exit;
     static Connection con;
-
+    static String tFiliere = "";
+    static String tFormat = "";
 
     /**
      * Interface graphique de la page pour créer un Examen
@@ -59,7 +63,7 @@ public class AjouteExam
     public static boolean Display() throws SQLException
     {
         exit  = false;
-
+        con = MyDataSourceFactory.getConnection();
         //Containers-----------------------
         GridPane gpane = new GridPane();
         HBox hbox = new HBox();
@@ -80,33 +84,44 @@ public class AjouteExam
         //Matières-------------------------
         gpane.add(matiere, 0, 0);
         gpane.add(comboMatiere, 1, 0);
+        comboMatiere.getItems().addAll("Mathématiques","POO", "BDD");
+        comboMatiere.autosize();
 
         //Année d'étude ------------------
         gpane.add(anneeEtu, 0, 1);
         gpane.add(comboAnnee, 1, 1);
+        comboAnnee.getItems().addAll("L1","L2","L3");
 
         //Filières------------------------
         gpane.add(filiere, 0, 2);
         gpane.add(bFiliere, 1, 2);
+        gpane.add(Linfo,0,3);
+        gpane.add(Lmath,1,3);
+        gpane.add(Lphy,2,3);
+
 
         //Duree----------------------------
-        gpane.add(duree, 0, 3);
-        gpane.add(tfDuree, 1, 3);
+        gpane.add(duree, 0, 4);
+        gpane.add(tfDuree, 1, 4);
+
 
         //Format-----------------------------
-        gpane.add(format, 0, 4);
+        gpane.add(format, 0, 5);
         radFormat1.setToggleGroup(gFormat);
         radFormat2.setToggleGroup(gFormat);
-        gpane.add(radFormat1, 1, 4);
-        gpane.add(radFormat2, 2, 4);
-        gpane.add(salle, 0, 5);
-        gpane.add(comboSalle, 1, 5);
+        gpane.add(radFormat1, 1, 5);
+        gpane.add(radFormat2, 2, 5);
+        gpane.add(salle, 0, 6);
+        gpane.add(comboSalle, 1, 6);
+        comboSalle.getItems().addAll("Amphithéatre" , "Salle d'Info", "Salle de Chimie");
 
         //Boutons----------------------------
         hbox.getChildren().add(add);
         hbox.getChildren().add(cancel);
 
         con = MyDataSourceFactory.getConnection();
+
+
 
         //Fonctionnement des Boutons
         bFiliere.setOnAction(e ->
@@ -121,7 +136,18 @@ public class AjouteExam
 
         add.setOnAction(e ->
         {
-            //ajoute a la bdd
+            if (radFormat1.isSelected())
+                tFormat = "Ecrit";
+            else if(radFormat2.isSelected())
+                tFormat = "Oral";
+            try
+            {
+                MyDataSourceFactory.CreateExam(con,  String.valueOf(comboMatiere.getValue()), String.valueOf(comboAnnee.getValue()), String.valueOf(tFiliere), Integer.parseInt(tfDuree.getText()), String.valueOf(tFormat),String.valueOf(comboSalle.getValue()) );
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+            tFiliere ="";
+            window.close();
         });
 
         cancel.setOnAction(e ->
@@ -133,7 +159,7 @@ public class AjouteExam
             if (result.get() == ButtonType.OK)
             {
                 exit = true;
-                window.hide();
+               window.close();
             }
         });
 
@@ -144,8 +170,37 @@ public class AjouteExam
         window.setScene(scene);
         window.showAndWait();
         return exit;
+
     }
 
+    public static void afficheFiliere()
+    {
+        if(Filiere.l1inf.isSelected())
+        {
+            Linfo.setVisible(true);
+            tFiliere += "Informatiques";
+        }
+        else
+            Linfo.setVisible(false);
+
+        if(Filiere.l2inf.isSelected())
+        {
+            Lmath.setVisible(true);
+            tFiliere +=" Mathématiques";
+        }
+        else
+            Lmath.setVisible(false);
+
+        if(Filiere.l3inf.isSelected())
+        {
+            Lphy.setVisible(true);
+            tFiliere +=" Physiques";
+        }
+        else
+            Lphy.setVisible(false);
+
+
+    }
 
 }
 
