@@ -19,14 +19,12 @@ import org.acme.optaplanner.domain.Room;
 import org.acme.optaplanner.domain.Timeslot;
 import org.acme.optaplanner.domain.Examens;
 import org.acme.optaplanner.domain.TimeTable;
-import org.acme.optaplanner.rest.TimeTableResource;
 
 @QuarkusTest
 public class SolvingTest {
     static Button valider = new Button("Résoudre : ");
 
-    @Inject
-    TimeTableResource timeTableResource;
+
     public static void Display() throws SQLException {
 
         Stage window = new Stage();
