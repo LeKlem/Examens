@@ -14,6 +14,8 @@ public class ScoAccueil {
 
     //implémentations
     static Button Battribuer = new Button("Attribuer");
+    static Button Bsalle = new Button("Disponibilité salle");
+    static Button Bmodif = new Button("Modifier");
     static Button Bcalendrier = new Button("Calendrier");
     static Button Brechercher = new Button("Rechercher");
 
@@ -26,7 +28,7 @@ public class ScoAccueil {
         exit = false;
 
         //connexion
-        //con = MyDataSourceFactory.getConnection();
+        con = MyDataSourceFactory.getConnection();
 
         //container
         Stage window = new Stage();
@@ -37,6 +39,8 @@ public class ScoAccueil {
 
         //contenu
         vbox.getChildren().add(Battribuer);
+        vbox.getChildren().add(Bsalle);
+        vbox.getChildren().add(Bmodif);
         vbox.getChildren().add(Bcalendrier);
         vbox.getChildren().add(Brechercher);
 
@@ -45,7 +49,27 @@ public class ScoAccueil {
         Battribuer.setOnAction(e ->
         {
             try {
-                attribuer.Display();
+                Attribuer.Display();
+            } catch (SQLException throwables)
+            {
+                throwables.printStackTrace();
+            }
+        });
+
+        Bsalle.setOnAction(e ->
+        {
+            try {
+                DispoSalle.Display();
+            } catch (SQLException throwables)
+            {
+                throwables.printStackTrace();
+            }
+        });
+
+        Bmodif.setOnAction(e ->
+        {
+            try {
+                ScoModifier.Display();
             } catch (SQLException throwables)
             {
                 throwables.printStackTrace();
@@ -62,18 +86,18 @@ public class ScoAccueil {
             }
         }); */
 
-        Brechercher.setOnAction(e ->
+        /* Brechercher.setOnAction(e ->
         {
             try {
                 ScoRechercher.Display();
-            } catch (SQLException throwables)
+            } catch (SQLException | ClassNotFoundException throwables)
             {
                 throwables.printStackTrace();
             }
-        });
+        }); */
 
         //affichage
-        Scene scene = new Scene(vbox, 300, 150);
+        Scene scene = new Scene(vbox, 300, 200);
         window.setScene(scene);
         window.showAndWait();
         return exit;

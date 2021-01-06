@@ -24,6 +24,10 @@ public class ScoRechercher {
     static ComboBox<String> Dmatiere = new ComboBox<String>();
     static ComboBox<String> Dexamen = new ComboBox<String>();
 
+    static int id;
+
+    static String nomExam;
+
     static Label Lannee = new Label("Année d'étude :  ");
     static Label Lfiliere = new Label("Filière : ");
     static Label Lmatiere = new Label("Matière : ");
@@ -35,7 +39,7 @@ public class ScoRechercher {
     private static ResultSet Rs;
 
 
-    public static boolean Display() throws SQLException {
+    public static boolean Display() throws SQLException, ClassNotFoundException {
 
         exit = false;
 
@@ -56,20 +60,57 @@ public class ScoRechercher {
         //contenu :
 
         //annee
+        St= con.createStatement();
+        Rs = St.executeQuery("SELECT annee FROM examen");
+        while (Rs.next())
+        {
+            //Pour affecter une valeur de base de données à un Combobox
+            Dannee.getItems().add(Integer.valueOf(Rs.getString("annee")));
+        }
+
         grid.add(Dannee, 1, 0);
         grid.add(Lannee, 0, 0);
 
         //filiere
+        St= con.createStatement();
+        Rs = St.executeQuery("SELECT filiere FROM examen");
+        while (Rs.next())
+        {
+            Dfiliere.getItems().add((Rs.getString("filiere")));
+        }
         grid.add(Lfiliere, 0, 1);
         grid.add(Dfiliere, 1, 1);
 
         //matiere
+        St= con.createStatement();
+        Rs = St.executeQuery("SELECT matiere FROM examen");
+        while (Rs.next())
+        {
+            Dmatiere.getItems().add((Rs.getString("matiere")));
+        }
         grid.add(Dmatiere, 1, 2);
         grid.add(Lmatiere, 0, 2);
 
         //examen
+        St= con.createStatement();
+        Rs = St.executeQuery("SELECT nom FROM examen");
+        while (Rs.next())
+        {
+            Dexamen.getItems().add((Rs.getString("nom")));
+        }
         grid.add(Dexamen, 1, 3);
         grid.add(Lexamen, 0, 3);
+
+        //id
+        nomExam = Dexamen.getSelectionModel().getSelectedItem();
+        String s = "SELECT id FROM examen WHERE nom = ?";
+        PreparedStatement pst = con.prepareStatement(s);
+        pst.setString(1, nomExam);
+        Rs = pst.executeQuery();
+        while (Rs.next())
+        {
+            id = Rs.getInt("id");
+        }
 
         //boutons
         vbox.getChildren().add(Brechercher);
@@ -78,25 +119,8 @@ public class ScoRechercher {
         //fonctionnement des boutons
         Brechercher.setOnAction(e ->
         {
-            //recherche dans la bdd
-            ResultSet rs = null;
-            String requete = "SELECT annee, filiere, matiere, exam FROM examen";
-
-            //attribue les valeurs des combobox pour la bdd, puis renvoi vers Info
             try {
-                Statement stmt = con.createStatement();
-                rs = stmt.executeQuery(requete);
-                info.Display(); //il faut que cela renvoi les infos en rapport avec la requete
-                while (rs.next()) {
-                    Integer annee = (Integer) Dannee.getValue();
-                    annee = rs.getInt("annee");
-                    String filiere = (String) Dfiliere.getValue();
-                    filiere = rs.getString("filiere");
-                    String matiere = (String) Dmatiere.getValue();
-                    matiere = rs.getString("matiere");
-                    String exam = (String) Dexamen.getValue();
-                    exam = rs.getString("exam");
-                }
+                ScoInfo.Display();
             } catch (SQLException throwables)
             {
                 throwables.printStackTrace();
