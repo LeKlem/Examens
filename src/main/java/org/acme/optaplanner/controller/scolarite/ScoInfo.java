@@ -8,27 +8,22 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.acme.optaplanner.controller.MyDataSourceFactory;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
-import java.sql.Statement;
-import java.util.Date;
 import java.util.Optional;
 
-public class attribuer {
+public class ScoInfo {
 
     //implémentations
 
-    static TextField examen = new TextField();
-    static TextField heure = new TextField(); //textfield en attendant de trouver mieux
+    static Label salle;
+    static Label examen;
+    static Label date;
+    static Label heure;
 
-    static Button Bvalider = new Button("Valider");
+    static Button Battribuer = new Button("Attribuer");
     static Button Bannuler = new Button("Annuler");
-
-    static ComboBox<String> Dsalle = new ComboBox<String>();
-
-    static DatePicker Pdate = new DatePicker();
+    static Button Bmodifier = new Button("Modifier");
 
     static Label Lsalle = new Label("Salle libre : ");
     static Label Lexamen = new Label("Examen : ");
@@ -37,6 +32,8 @@ public class attribuer {
 
     static Connection con;
     static boolean exit;
+    private static Statement St;
+    private static ResultSet Rs;
 
 
     public static boolean Display() throws SQLException {
@@ -44,11 +41,11 @@ public class attribuer {
         exit = false;
 
         //connexion
-        //con = MyDataSourceFactory.getConnection();
+        con = MyDataSourceFactory.getConnection();
 
         //container
         Stage window = new Stage();
-        window.setTitle("Attribuer");
+        window.setTitle("Info");
         GridPane grid = new GridPane();
         VBox vbox = new VBox();
         vbox.setAlignment(Pos.CENTER);
@@ -57,52 +54,62 @@ public class attribuer {
         //contenu :
 
         //examen
+        String a = "SELECT nom FROM examen WHERE id = ?";
+        PreparedStatement p1 = con.prepareStatement(a);
+        p1.setInt(1, ScoRechercher.id);
+        Rs = p1.executeQuery();
+        while (Rs.next())
+        {
+            examen = new Label(Rs.getString("nom"));
+        }
         grid.add(Lexamen, 0, 0);
         grid.add(examen, 1, 0);
 
-        //date
-        grid.add(Ldate, 0, 1);
-        grid.add(Pdate, 1, 1);
+        //date (convertit en idTimeSlot par le solver)
+        //grid.add(Ldate, 0, 1);
+        //grid.add(date, 1, 1);
 
-        //heure
-        grid.add(Lheure, 0, 2);
-        grid.add(heure, 1, 2);
+        //heure (convertit en idTimeSlot par le solver)
+        //grid.add(Lheure, 0, 2);
+        //grid.add(heure, 1, 2);
 
         //salle
+        String b = "SELECT salle FROM examen WHERE id = ?";
+        PreparedStatement p2 = con.prepareStatement(b);
+        p2.setInt(1, ScoRechercher.id);
+        Rs = p2.executeQuery();
+        while (Rs.next())
+        {
+            salle = new Label(Rs.getString("salle"));
+        }
         grid.add(Lsalle, 0, 3);
-        grid.add(Dsalle, 1, 3);
+        grid.add(salle, 1, 3);
 
         //boutons
-        vbox.getChildren().add(Bvalider);
+        vbox.getChildren().add(Battribuer);
+        vbox.getChildren().add(Bmodifier);
         vbox.getChildren().add(Bannuler);
 
         //fonctionnement boutons
-        Bvalider.setOnAction(e ->
+        Battribuer.setOnAction(e ->
         {
-
-            //recherche dans la bdd
-            ResultSet rs = null;
-            String requete = "INSERT INTO examen VALUES ('examen', 'date', 'heure', 'salle')";
-
-            //envoi les infos vers la bdd, puis renvoi vers l'accueil
             try {
-                Statement stmt = con.createStatement();
-                rs = stmt.executeQuery(requete);
-                ScoAccueil.Display();
-                while (rs.next()) {
-                    String exam = (String) examen.getText();
-                    exam = rs.getString("examen");
-                    String hr = (String) heure.getText();
-                    hr = rs.getString("heure");
-                    String salle = (String) Dsalle.getValue();
-                    salle = rs.getString("heure");
-                }
+                Attribuer.Display();
             } catch (SQLException throwables)
             {
                 throwables.printStackTrace();
             }
         });
 
+        Bmodifier.setOnAction(e ->
+        {
+            try {
+                ScoModifier.Display();
+            } catch (SQLException throwables)
+            {
+                throwables.printStackTrace();
+            }
+        });
 
         Bannuler.setOnAction(e -> //demande confirmation pour annuler puis renvoi vers l'accueil
         {
@@ -123,7 +130,7 @@ public class attribuer {
 
         //affichage
         vbox.getChildren().add(grid);
-        Scene scene = new Scene(vbox, 300, 200);
+        Scene scene = new Scene(vbox, 300, 220);
         window.setScene(scene);
         window.showAndWait();
         return exit;

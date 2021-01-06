@@ -8,32 +8,33 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.acme.optaplanner.controller.MyDataSourceFactory;
 
-import java.sql.Connection;
-import java.sql.SQLException;
+import java.sql.*;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Optional;
 
-public class modifier {
+public class Attribuer {
 
     //implémentations
 
-    static TextField examen = new TextField();
-    static TextField heure = new TextField();
+    static TextField nom = new TextField();
+    static TextField prenom = new TextField();
 
+    static Button Bvalider = new Button("Valider");
     static Button Bannuler = new Button("Annuler");
-    static Button Bmodifier = new Button("Modifier");
 
-    static ComboBox<String> Dsalle = new ComboBox<String>();
+    static ComboBox<String> filiere = new ComboBox<String>();
 
-    static DatePicker Pdate = new DatePicker();
-
-    static Label Lsalle = new Label("Salle libre : ");
-    static Label Lexamen = new Label("Examen : ");
-    static Label Ldate = new Label("Date : ");
-    static Label Lheure = new Label("Heure : ");
+    static Label Lnom = new Label("Nom : ");
+    static Label Lprenom = new Label("Prénom : ");
+    static Label Lfiliere = new Label("Filiere : ");
 
     static Connection con;
     static boolean exit;
+    private static Statement St;
+    private static ResultSet Rs;
 
 
     public static boolean Display() throws SQLException {
@@ -45,7 +46,7 @@ public class modifier {
 
         //container
         Stage window = new Stage();
-        window.setTitle("Modifier");
+        window.setTitle("Attribuer");
         GridPane grid = new GridPane();
         VBox vbox = new VBox();
         vbox.setAlignment(Pos.CENTER);
@@ -53,39 +54,44 @@ public class modifier {
 
         //contenu :
 
-        //examen
-        grid.add(Lexamen, 0, 0);
-        grid.add(examen, 1, 0);
+        //eleve
+        grid.add(Lnom, 0, 0);
+        grid.add(nom, 1, 0);
+        grid.add(Lprenom, 0, 1);
+        grid.add(prenom, 1, 1);
 
-        //date
-        grid.add(Ldate, 0, 1);
-        grid.add(Pdate, 1, 1);
-
-        //heure
-        grid.add(Lheure, 0, 2);
-        grid.add(heure, 1, 2);
-
-        //salle
-        grid.add(Lsalle, 0, 3);
-        grid.add(Dsalle, 1, 3);
+        //filiere
+        St= con.createStatement();
+        Rs = St.executeQuery("SELECT filiere FROM examen");
+        while (Rs.next())
+        {
+            filiere.getItems().add((Rs.getString("filiere")));
+        }
+        grid.add(Lfiliere, 0, 2);
+        grid.add(filiere, 1, 2);
 
         //boutons
-        vbox.getChildren().add(Bmodifier);
+        vbox.getChildren().add(Bvalider);
         vbox.getChildren().add(Bannuler);
 
-        //fonctionnement des boutons
-        Bmodifier.setOnAction(e ->
+        //fonctionnement boutons
+        Bvalider.setOnAction(e ->
         {
-
-            //modifie dans la bdd et retourne à Info
-
+            //envoi les infos vers la bdd, puis renvoi vers l'accueil
             try {
-                info.Display();
+                String requete = "UPDATE eleve SET filiere = '"+filiere.getSelectionModel().getSelectedItem()+"' " +
+                        "WHERE nom = '"+nom.getText()+"' AND"+" prenom = '"+prenom.getText()+"'";
+
+                Statement stmt = con.createStatement();
+                stmt.executeUpdate(requete);
+                ScoAccueil.Display();
+
             } catch (SQLException throwables)
             {
                 throwables.printStackTrace();
             }
         });
+
 
         Bannuler.setOnAction(e -> //demande confirmation pour annuler puis renvoi vers l'accueil
         {
@@ -106,7 +112,7 @@ public class modifier {
 
         //affichage
         vbox.getChildren().add(grid);
-        Scene scene = new Scene(vbox, 300, 250);
+        Scene scene = new Scene(vbox, 300, 200);
         window.setScene(scene);
         window.showAndWait();
         return exit;
