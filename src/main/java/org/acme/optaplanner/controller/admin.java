@@ -2,10 +2,7 @@ package org.acme.optaplanner.controller;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -30,7 +27,7 @@ public class admin {
 
     public static boolean Display() throws SQLException {
         exit = false;
-        combo.getItems().addAll("Secrétaria", "Scolarité");
+        combo.getItems().addAll("Secrétariat", "Scolarité");
         combo.setValue("Selectionner une valeur");
         Stage window = new Stage();
         window.setTitle("Connexion");
@@ -46,10 +43,16 @@ public class admin {
         grid.add(Password, 1, 3);
         grid.add(Poste, 0, 4);
         grid.add(combo, 1, 4);
-        grid.add(valider, 0 ,5);
-        grid.add(deco , 1, 5);
+        grid.add(deco, 0 ,5);
+        grid.add(valider , 1, 5);
         con = MyDataSourceFactory.getConnection();
         valider.setOnAction(e -> {
+            int count = 0;
+            try {
+                 count = MyDataSourceFactory.getNumberOfUser(con);
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
             String job = combo.getValue();
             if(!job.equals("Selectionner une valeur")) {
                 String log = Login.getText();
@@ -59,19 +62,36 @@ public class admin {
                 psw = PasswordUtils.HashPassword(psw);
                 if(!( log.isEmpty() || psw.isEmpty() || n.isEmpty() || p.isEmpty()))
                     MyDataSourceFactory.CreateAccount(con, log, psw, n, p, job);
+                try {
+                    System.out.println(count);
+                    System.out.println(MyDataSourceFactory.getNumberOfUser(con));
+                    if(count == (MyDataSourceFactory.getNumberOfUser(con) -  1))
+                    {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setContentText("Compte crée avec succès!");
+                        alert.setHeaderText(null);
+                        alert.showAndWait();
+                    }
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
                 nom.setText("");
                 prenom.setText("");
                 Login.setText("");
                 Password.setText("");
             }else{
-                //Signaler erreur d'une manière sympa
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setContentText("Erreur : aucune action effectuée");
+                alert.setHeaderText(null);
+                alert.showAndWait();
             }
         });
         deco.setOnAction(e -> {
             exit = true;
             window.close();
         });
-        Scene scene = new Scene(grid, 300, 150);
+       // deco.setStyle("text-color : blue");
+        Scene scene = new Scene(grid, 400, 200 );
         window.setScene(scene);
         window.showAndWait();
         return exit;

@@ -3,11 +3,12 @@ package org.acme.optaplanner.domain;
 
 public class Room {
     private String name;
-
+    private int sits;
     public Room() {
     }
 
-    public Room(String name) {
+    public Room(String name, int sits) {
+        this.sits = sits;
         this.name = name;
     }
 

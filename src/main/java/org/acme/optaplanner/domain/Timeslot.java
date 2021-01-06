@@ -2,24 +2,25 @@ package org.acme.optaplanner.domain;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.util.Date;
 
 public class Timeslot {
 
-    private DayOfWeek dayOfWeek;
+    private Date date;
     private LocalTime startTime;
     private LocalTime endTime;
 
     public Timeslot() {
     }
 
-    public Timeslot(DayOfWeek dayOfWeek, LocalTime startTime, LocalTime endTime) {
-        this.dayOfWeek = dayOfWeek;
+    public Timeslot(Date date, LocalTime startTime, LocalTime endTime) {
+        this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
     }
 
-    public DayOfWeek getDayOfWeek() {
-        return dayOfWeek;
+    public Date date() {
+        return date;
     }
 
     public LocalTime getStartTime() {
@@ -32,7 +33,7 @@ public class Timeslot {
 
     @Override
     public String toString() {
-        return dayOfWeek + " " + startTime;
+        return date + " " + startTime;
     }
 
 }

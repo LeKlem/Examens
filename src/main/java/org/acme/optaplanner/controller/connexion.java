@@ -20,6 +20,7 @@ public class connexion {
     static Label Lpsw = new Label("Mot de passe : ");
     static Label error = new Label("Aucune correspondance");
     static Connection con;
+
     public static String Display() throws SQLException {
         connectedAs = "";
         Stage window = new Stage();

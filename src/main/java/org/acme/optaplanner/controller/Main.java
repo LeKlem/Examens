@@ -1,6 +1,7 @@
     package org.acme.optaplanner.controller;
 
     import javafx.application.Application;
+    import javafx.scene.control.Alert;
     import javafx.stage.Stage;
     import org.acme.optaplanner.controller.scolarite.ScoAccueil;
     import org.acme.optaplanner.controller.secretariat.Accueil;
@@ -60,6 +61,10 @@
                         deco = ScoAccueil.Display();
                         break;
                     case (""):
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setContentText("Aucune correspondance");
+                        alert.setHeaderText(null);
+                        alert.showAndWait();
                         break;
                 }
             }while(deco);

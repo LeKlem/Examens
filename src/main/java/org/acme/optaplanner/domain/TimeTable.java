@@ -19,7 +19,7 @@ public class TimeTable {
     @ValueRangeProvider(id = "roomRange")
     private List<Room> roomList;
     @PlanningEntityCollectionProperty
-    private List<Lesson> lessonList;
+    private List<Examens> examensList;
 
     @PlanningScore
     private HardSoftScore score;
@@ -27,10 +27,10 @@ public class TimeTable {
     public TimeTable() {
     }
 
-    public TimeTable(List<Timeslot> timeslotList, List<Room> roomList, List<Lesson> lessonList) {
+    public TimeTable(List<Timeslot> timeslotList, List<Room> roomList, List<Examens> examensList) {
         this.timeslotList = timeslotList;
         this.roomList = roomList;
-        this.lessonList = lessonList;
+        this.examensList = examensList;
     }
 
     public List<Timeslot> getTimeslotList() {
@@ -41,8 +41,8 @@ public class TimeTable {
         return roomList;
     }
 
-    public List<Lesson> getLessonList() {
-        return lessonList;
+    public List<Examens> getLessonList() {
+        return examensList;
     }
 
     public HardSoftScore getScore() {

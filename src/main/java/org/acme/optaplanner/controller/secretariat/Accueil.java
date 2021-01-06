@@ -27,6 +27,7 @@ public class Accueil
     //Implémentation des différents éléments
     static Button addExam = new Button("Ajouter un examen");
     static Button search = new Button("Rechercher un examen");
+    static Button deco =  new Button("Déconnexion");
     static boolean exit;
 
     /**
@@ -41,21 +42,22 @@ public class Accueil
         //Container------------------
         Stage window = new Stage();
         window.setTitle("Accueil");
-        VBox menue = new VBox();
-        menue.setAlignment(Pos.CENTER);
-        menue.setSpacing(10);
+        VBox vbox = new VBox();
+        vbox.setAlignment(Pos.CENTER);
+        vbox.setSpacing(10);
 
         //Contenu------------------------
-        menue.getChildren().add(addExam);   //Ajouter un exam
-        menue.getChildren().add(search);    //Rechercher un exam
+        vbox.getChildren().add(addExam);   //Ajouter un exam
+        vbox.getChildren().add(search);    //Rechercher un exam
+        vbox.getChildren().add(deco);
+
 
         //Fonctionnement des différents buttons
         addExam.setOnAction(e ->
         {
             try {
                 AjouteExam.Display();
-            } catch (SQLException throwables)   //try catch ? Besoin de résoudre le problème pour rendre le code homogène
-            {
+            } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
         });
@@ -71,8 +73,14 @@ public class Accueil
             }
         });
 
+        deco.setOnAction(e ->
+        {
+            exit = true;
+            window.close();
+        });
+
         //Affichage
-        Scene scene = new Scene(menue,350,250);
+        Scene scene = new Scene(vbox,350,250);
         window.setScene(scene);
         window.showAndWait();
         return exit;

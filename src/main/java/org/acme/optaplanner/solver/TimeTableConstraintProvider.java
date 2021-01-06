@@ -1,6 +1,6 @@
 package org.acme.optaplanner.solver;
 
-import org.acme.optaplanner.domain.Lesson;
+import org.acme.optaplanner.domain.Examens;
 import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScore;
 import org.optaplanner.core.api.score.stream.Constraint;
 import org.optaplanner.core.api.score.stream.ConstraintFactory;
@@ -24,15 +24,15 @@ public class TimeTableConstraintProvider implements ConstraintProvider {
         // A room can accommodate at most one lesson at the same time.
 
         // Select a lesson ...
-        return constraintFactory.from(Lesson.class)
+        return constraintFactory.from(Examens.class)
                 // ... and pair it with another lesson ...
-                .join(Lesson.class,
+                .join(Examens.class,
                         // ... in the same timeslot ...
-                        Joiners.equal(Lesson::getTimeslot),
+                        Joiners.equal(Examens::getTimeslot),
                         // ... in the same room ...
-                        Joiners.equal(Lesson::getRoom),
+                        Joiners.equal(Examens::getRoom),
                         // ... and the pair is unique (different id, no reverse pairs)
-                        Joiners.lessThan(Lesson::getId))
+                        Joiners.lessThan(Examens::getId))
                 // then penalize each pair with a hard weight.
                 .penalize("Room conflict", HardSoftScore.ONE_HARD);
     }
@@ -40,19 +40,18 @@ public class TimeTableConstraintProvider implements ConstraintProvider {
     private Constraint teacherConflict(ConstraintFactory constraintFactory) {
         // A teacher can teach at most one lesson at the same time.
         return constraintFactory
-                .fromUniquePair(Lesson.class,
-                        Joiners.equal(Lesson::getTimeslot),
-                        Joiners.equal(Lesson::getTeacher))
+                .fromUniquePair(Examens.class,
+                        Joiners.equal(Examens::getTimeslot),
+                        Joiners.equal(Examens::getTeacher))
                 .penalize("Teacher conflict", HardSoftScore.ONE_HARD);
     }
 
     private Constraint studentGroupConflict(ConstraintFactory constraintFactory) {
         // A student can attend at most one lesson at the same time.
         return constraintFactory
-                .fromUniquePair(Lesson.class,
-                        Joiners.equal(Lesson::getTimeslot),
-                        Joiners.equal(Lesson::getStudentGroup))
+                .fromUniquePair(Examens.class,
+                        Joiners.equal(Examens::getTimeslot),
+                        Joiners.equal(Examens::getStudentGroup))
                 .penalize("Student group conflict", HardSoftScore.ONE_HARD);
     }
-
 }
