@@ -15,6 +15,9 @@ public class Room {
     public String getName() {
         return name;
     }
+    public int getSits() {
+        return sits;
+    }
 
     @Override
     public String toString() {
