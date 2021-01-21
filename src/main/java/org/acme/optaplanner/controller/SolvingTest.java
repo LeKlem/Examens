@@ -7,18 +7,16 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.inject.Inject;
-
 import io.quarkus.test.junit.QuarkusTest;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import org.acme.optaplanner.domain.Room;
-import org.acme.optaplanner.domain.Timeslot;
-import org.acme.optaplanner.domain.Examens;
-import org.acme.optaplanner.domain.TimeTable;
+import org.acme.optaplanner.model.Room;
+import org.acme.optaplanner.model.Timeslot;
+import org.acme.optaplanner.model.Examens;
+import org.acme.optaplanner.model.TimeTable;
 
 @QuarkusTest
 public class SolvingTest {

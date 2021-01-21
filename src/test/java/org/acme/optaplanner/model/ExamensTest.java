@@ -1,4 +1,4 @@
-package org.acme.optaplanner.domain;
+package org.acme.optaplanner.model;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +23,6 @@ class ExamensTest {
         Timeslot slot2 = exam.getTimeslot();
         assertEquals(slot1.getStartTime(), slot2.getStartTime());
         assertEquals(slot1.getEndTime(), slot2.getEndTime());
-
         assertEquals(exam.getStudentGroup(), "Informatique2");
 
     }

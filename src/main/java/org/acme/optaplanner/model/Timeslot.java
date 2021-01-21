@@ -1,6 +1,5 @@
-package org.acme.optaplanner.domain;
+package org.acme.optaplanner.model;
 
-import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.util.Date;
 

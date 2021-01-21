@@ -1,4 +1,4 @@
-package org.acme.optaplanner.domain;
+package org.acme.optaplanner.model;
 
 import java.util.List;
 

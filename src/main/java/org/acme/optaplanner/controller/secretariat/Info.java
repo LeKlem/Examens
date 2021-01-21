@@ -8,9 +8,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.acme.optaplanner.controller.secretariat.Accueil;
-import org.acme.optaplanner.controller.secretariat.Modifier;
-import org.acme.optaplanner.controller.secretariat.Rechercher;
+import org.acme.optaplanner.view.Accueil;
 
 import java.sql.SQLException;
 import java.util.Optional;

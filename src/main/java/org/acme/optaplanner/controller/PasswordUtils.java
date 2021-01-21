@@ -46,17 +46,5 @@ public class PasswordUtils {
         return returnValue;
     }
 
-    public static boolean verifyUserPassword(String providedPassword,
-                                             String securedPassword)
-    {
-        boolean returnValue = false;
 
-        // Generate New secure password with the same salt
-        String newSecurePassword = HashPassword(providedPassword);
-
-        // Check if two passwords are equal
-        returnValue = newSecurePassword.equalsIgnoreCase(securedPassword);
-
-        return returnValue;
-    }
 }

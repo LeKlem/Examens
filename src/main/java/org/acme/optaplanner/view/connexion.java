@@ -1,4 +1,4 @@
-package org.acme.optaplanner.controller;
+package org.acme.optaplanner.view;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import org.acme.optaplanner.controller.MyDataSourceFactory;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -46,7 +47,7 @@ public class connexion {
                 window.close();
         });
         Scene scene = new Scene(GRconn, 300, 150);
-        window.setScene(scene);
+        window.setScene(scene); 
         window.showAndWait();
         return connectedAs;
     }

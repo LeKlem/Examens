@@ -1,4 +1,4 @@
-package org.acme.optaplanner.controller.scolarite;
+package org.acme.optaplanner.view;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -6,6 +6,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import org.acme.optaplanner.controller.MyDataSourceFactory;
+import org.acme.optaplanner.controller.scolarite.Attribuer;
+import org.acme.optaplanner.controller.scolarite.DispoSalle;
+import org.acme.optaplanner.controller.scolarite.ScoModifier;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -32,7 +35,7 @@ public class ScoAccueil {
 
         //container
         Stage window = new Stage();
-        window.setTitle("Acceuil");
+        window.setTitle("Accueil");
         VBox vbox = new VBox();
         vbox.setAlignment(Pos.CENTER);
         vbox.setSpacing(10);

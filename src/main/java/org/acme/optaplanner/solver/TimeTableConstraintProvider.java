@@ -1,6 +1,6 @@
 package org.acme.optaplanner.solver;
 
-import org.acme.optaplanner.domain.Examens;
+import org.acme.optaplanner.model.Examens;
 import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScore;
 import org.optaplanner.core.api.score.stream.Constraint;
 import org.optaplanner.core.api.score.stream.ConstraintFactory;

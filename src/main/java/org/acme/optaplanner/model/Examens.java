@@ -1,4 +1,4 @@
-package org.acme.optaplanner.domain;
+package org.acme.optaplanner.model;
 import org.optaplanner.core.api.domain.entity.PlanningEntity;
 import org.optaplanner.core.api.domain.lookup.PlanningId;
 import org.optaplanner.core.api.domain.variable.PlanningVariable;

@@ -1,10 +1,12 @@
-package org.acme.optaplanner.controller;
+package org.acme.optaplanner.view;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import org.acme.optaplanner.controller.MyDataSourceFactory;
+import org.acme.optaplanner.controller.PasswordUtils;
 
 import java.sql.Connection;
 import java.sql.SQLException;

@@ -7,12 +7,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.acme.optaplanner.controller.MyDataSourceFactory;
+import org.acme.optaplanner.view.ScoAccueil;
 
 import java.sql.*;
 
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Optional;
 
 public class DispoSalle {

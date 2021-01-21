@@ -1,10 +1,8 @@
-    package org.acme.optaplanner.controller;
+    package org.acme.optaplanner.view;
 
     import javafx.application.Application;
     import javafx.scene.control.Alert;
     import javafx.stage.Stage;
-    import org.acme.optaplanner.controller.scolarite.ScoAccueil;
-    import org.acme.optaplanner.controller.secretariat.Accueil;
 
     /**
      * <b>Main est la classe contenant le main permettant l'articulation des différentes parties entre-elles</b>

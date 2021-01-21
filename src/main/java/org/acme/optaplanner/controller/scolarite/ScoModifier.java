@@ -7,7 +7,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.acme.optaplanner.controller.MyDataSourceFactory;
-import org.acme.optaplanner.domain.Timeslot;
+import org.acme.optaplanner.view.ScoAccueil;
 
 import java.sql.*;
 

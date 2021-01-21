@@ -1,10 +1,12 @@
-package org.acme.optaplanner.controller.secretariat;
+package org.acme.optaplanner.view;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.acme.optaplanner.controller.secretariat.AjouteExam;
+import org.acme.optaplanner.controller.secretariat.Rechercher;
 
 import java.sql.SQLException;
 

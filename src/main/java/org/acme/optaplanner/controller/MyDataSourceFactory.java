@@ -2,15 +2,14 @@ package org.acme.optaplanner.controller;
 
 
 import java.sql.*;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
-import org.acme.optaplanner.domain.Examens;
-import org.acme.optaplanner.domain.Room;
-import org.acme.optaplanner.domain.TimeTable;
-import org.acme.optaplanner.domain.Timeslot;
+import org.acme.optaplanner.model.Examens;
+import org.acme.optaplanner.model.Room;
+import org.acme.optaplanner.model.TimeTable;
+import org.acme.optaplanner.model.Timeslot;
 
 public class MyDataSourceFactory {
     static MysqlDataSource mysqlDS;
@@ -115,7 +114,7 @@ public class MyDataSourceFactory {
         }
         return x;
     }
-    static int getNumberOfUser(Connection con) throws SQLException {
+    public static int getNumberOfUser(Connection con) throws SQLException {
         int x = 0;
         String str = "SELECT COUNT(*) AS X FROM users";
         Statement stmt = con.createStatement();
