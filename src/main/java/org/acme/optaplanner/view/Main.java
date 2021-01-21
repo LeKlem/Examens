@@ -46,7 +46,7 @@
             boolean deco;
             do{
                 deco = false;
-                String connectedAs ="";
+                String connectedAs ="waiting";
                 connectedAs = connexion.Display();
                 switch (connectedAs)  {
                     case ("Admin"):
@@ -58,7 +58,7 @@
                     case ("Scolarité"):
                         deco = ScoAccueil.Display();
                         break;
-                    case (""):
+                    case ("error"):
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setContentText("Aucune correspondance");
                         alert.setHeaderText(null);

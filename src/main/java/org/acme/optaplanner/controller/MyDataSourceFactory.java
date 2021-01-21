@@ -70,12 +70,12 @@ public class MyDataSourceFactory {
         List<Examens> examensList = new ArrayList<Examens>();
 
         try {
-          String s = "Select * from room";
+          String s = "Select * from salle";
           ResultSet rs = null;
           Statement stmt = con.createStatement();
           rs = stmt.executeQuery(s);
           while(rs.next()){
-              roomList.add(new Room(rs.getString("name"), rs.getInt("sits")));
+              roomList.add(new Room(rs.getString("nom"), rs.getInt("capacité")));
           }
           s = "Select * from examens";
           rs = stmt.executeQuery(s);
@@ -95,7 +95,7 @@ public class MyDataSourceFactory {
     }
 
     public static void CreateExam (Connection con, String matiere, String anneEtu,String filiere ,int duree, String format,String salle) throws SQLException {
-        PreparedStatement stmt = con.prepareStatement("INSERT INTO examen(matiere,annee,filiere,Durée,format,salle) VALUES (?, ?, ?, ?, ?, ? )");
+        PreparedStatement stmt = con.prepareStatement("INSERT INTO examen(matiere,annee,filiere,duree,format,salle) VALUES (?, ?, ?, ?, ?, ? )");
         stmt.setString(1,matiere);
         stmt.setString(2,anneEtu);
         stmt.setString(3,filiere);

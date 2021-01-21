@@ -53,7 +53,6 @@ public class Accueil
         vbox.getChildren().add(search);    //Rechercher un exam
         vbox.getChildren().add(deco);
 
-
         //Fonctionnement des différents buttons
         addExam.setOnAction(e ->
         {

@@ -94,13 +94,13 @@ public class ScoModifier {
         vbox.getChildren().add(Bmodifier);
         vbox.getChildren().add(Bannuler);
 
-        //set idTimeSlot
+        /*set idTimeSlot
         St= con.createStatement();
         Rs = St.executeQuery("SELECT idTimeSlot FROM examen WHERE nom = '"+Dexamen.getSelectionModel().getSelectedItem()+"'");
         while (Rs.next())
         {
             idTimeSlot = Rs.getInt("idTimeSlot");
-        }
+        }*/
 
         //fonctionnement des boutons
         Bmodifier.setOnAction(e ->

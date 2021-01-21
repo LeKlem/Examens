@@ -43,8 +43,9 @@ public class connexion {
             String password = Password.getText();
             if (!(login.isEmpty() || password.isEmpty()))
                 connectedAs = MyDataSourceFactory.Connecting(con, login, password);
-            if(connectedAs != "")
+            if(connectedAs != "" && connectedAs != "error") {
                 window.close();
+            }
         });
         Scene scene = new Scene(GRconn, 300, 150);
         window.setScene(scene); 
